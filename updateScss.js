@@ -12,21 +12,6 @@ var collection = [
 	}
 ];
 
-
-var iterate_through_dir_list = function(dirList, finalScss) {
-	dirList.forEach(function(entry) {
-  	var importPath = '@import "';
-
-    if (path.extname(entry) === '.hbs') {
-      importPath = importPath + path.basename(entry, '.hbs');
-      finalScss = finalScss + importPath + '";\n';
-    }
-  });
-
-  return finalScss;
-};
-
-
 collection.forEach(function(data) {
 	nodeDir.files(data.dir, function(err, files) {
 		var names = [];
