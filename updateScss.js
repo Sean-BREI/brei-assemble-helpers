@@ -38,9 +38,9 @@ collection.forEach(function(data) {
 				var regex = new RegExp('^.+' + data.searchName + '/');
 				var name = path.basename(entry, '.hbs');
 
-				// if (!/^_+/.test(name) && data.name !== 'templates') {
+				if (!/^_+/.test(name)/* && data.name !== 'templates'*/) {
 					name = '_' + name;
-				// }
+				}
 
 				entry = entry.replace(regex, '');
 				entry = entry.split('/');
