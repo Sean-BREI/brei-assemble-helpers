@@ -60,10 +60,10 @@ collection.forEach(function(data) {
 		});
 
 		names.forEach(function(name) {
-			var importPath = '@import "';
+			var importPath = '@import \'';
 
 			importPath = importPath + name;
-			finalScssFile = finalScssFile + importPath + '";\n';
+			finalScssFile = finalScssFile + importPath + '\';\n';
 		});
 
 		fs.writeFile(finalPath, finalScssFile, function(err) {
@@ -81,7 +81,7 @@ var writeMissingFiles = function(data, entry) {
 	var readPath = './app/sass/' + data.name + '/' + name +'.scss';
 	fs.readFile(readPath, 'utf8', function(err, file) {
 		if (err) {
-			console.log('\n\nA SASS file doesnt exist.\n"I can fix it!" - Fix-it-Felix jr.\n\n');
+			console.log('\n\nA SASS file doesnt exist. Creating ' + name + ' for you.\n');
 		}
 
 		if (!file) {
