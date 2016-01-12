@@ -86,16 +86,17 @@ var writeMissingFiles = function(data, entry) {
 
 		if (!file) {
 			var writePath = readPath;
-			var content = '.' + name + ' {\n\n}';
+			var cleanName = name.replace('_', '');
+			var content = '.' + cleanName + ' {\n\n}\n';
 
-			if (name.length > 2) {
+			if (cleanName.length > 2) {
 				fs.writeFile(writePath, content, function(err) {
 					if (err) { throw err; }
 
-					console.log('\nI just wrote ' + name + ' for you!\n');
+					console.log('\nI just wrote ' + cleanName + ' for you!\n');
 				});
 			}
 
 		}
 	});
-}
+};
