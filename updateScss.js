@@ -26,13 +26,14 @@ collection.forEach(function(data) {
 		var finalScssFile = '';
 		var finalPath = './app/sass/' + data.name + '/_assemble-' + data.name +'.scss';
 
-		console.log('Updating Assemble.io sass...');
-
 		if (err) {
 			throw err;
 		}
 
+		console.log('Updating Assemble.io ' + data.name + ' sass...');
+
 		files.forEach(function(entry) {
+
 			if (path.extname(entry) === '.hbs') {
 				// Add names to be added to .scss file
 				var regex = new RegExp('^.+' + data.searchName + '/');
@@ -66,6 +67,11 @@ collection.forEach(function(data) {
 			finalScssFile = finalScssFile + importPath + '\';\n';
 		});
 
+		// console.log(finalPath, finalScssFile);
+
+		if (finalScssFile == '') {
+			console.log('file is empty!!!');
+		}
 		fs.writeFile(finalPath, finalScssFile, function(err) {
 			if (err) { throw err; }
 
@@ -77,11 +83,18 @@ collection.forEach(function(data) {
 
 // Check to see if same name .scss file exists. If not, create one
 var writeMissingFiles = function(data, entry) {
-	var name = entry[entry.length - 1];
-	var readPath = './app/sass/' + data.name + '/' + name +'.scss';
+
+	// console.log("\n====\nwriteMissingFiles()\n\n" + data + "\n" + entry + "\n====\n");
+
+	var name = entry;
+	var filename = data.name + '/' + name +'.scss'
+	var readPath = './app/sass/' + filename;
 	fs.readFile(readPath, 'utf8', function(err, file) {
+
+		// console.log("reading file " + readPath);
+
 		if (err) {
-			console.log('\n\nA SASS file doesnt exist. Creating ' + name + ' for you.\n');
+			console.log('\n\nA SASS file doesnt exist. Creating ' + filename + ' for you.\n');
 		}
 
 		if (!file) {
@@ -89,11 +102,17 @@ var writeMissingFiles = function(data, entry) {
 			var cleanName = name.replace('_', '');
 			var content = '.' + cleanName + ' {\n\n}\n';
 
-			if (cleanName.length > 2) {
-				fs.writeFile(writePath, content, function(err) {
-					if (err) { throw err; }
+			// console.log('== no file contents ==');
 
-					console.log('\nI just wrote ' + cleanName + ' for you!\n');
+			if (cleanName.length >= 1) {
+				fs.writeFile(writePath, content, function(err) {
+
+					if (err) {
+						throw err;
+					}
+
+					console.log('\nI just wrote ' + filename + ' for you!\n');
+
 				});
 			}
 
