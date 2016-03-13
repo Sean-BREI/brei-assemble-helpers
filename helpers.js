@@ -26,8 +26,8 @@ module.exports.register = function(Handlebars, options) {
 		path = nodePath.join(__dirname, '../fixtures/' + path);
 
 		try {
-			fixture = fs.readFileSync(path)
-			fixture = fixture.toString('utf8')
+			fixture = fs.readFileSync(path);
+			fixture = fixture.toString('utf8');
 			fixture = JSON.parse(fixture);
 		} catch (err) {
 			return console.error(err);
@@ -40,5 +40,29 @@ module.exports.register = function(Handlebars, options) {
 		return console.log(data);
 	});
 
+	Handlebars.registerHelper('str_compare', function(a, b, opts) {
+		if (a == b) {
+			return opts.fn(this);
+		} else {
+			return opts.inverse(this);
+		}
+	});
+
+	Handlebars.registerHelper('toLowerCase', function(str) {
+		return str.toLowerCase();
+	});
+
+	Handlebars.registerHelper('math', function(lvalue, operator, rvalue, options) {
+		lvalue = parseFloat(lvalue);
+		rvalue = parseFloat(rvalue);
+
+		return {
+			"+": lvalue + rvalue,
+			"-": lvalue - rvalue,
+			"*": lvalue * rvalue,
+			"/": lvalue / rvalue,
+			"%": lvalue % rvalue
+		}[operator];
+	});
 
 };
