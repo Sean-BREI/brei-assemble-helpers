@@ -97,7 +97,12 @@ var writeMissingFiles = function(data, entry) {
 			console.log('\n\nA SASS file doesnt exist. Creating ' + filename + ' for you.\n');
 		}
 
-		if (!file) {
+		if (!file && name != null && typeof name !== 'undefined') {
+
+			console.log('checking name: ', name, typeof name, name.length);
+
+			if (typeof name === "object") { name = name[0]; }
+
 			var writePath = readPath;
 			var cleanName = name.replace('_', '');
 			var content = '.' + cleanName + ' {\n\n}\n';
