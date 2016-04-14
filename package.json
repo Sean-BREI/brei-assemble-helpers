@@ -1,6 +1,6 @@
 {
   "name": "brei-assemble-helpers",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "custom-handlebar-helpers",
   "main": "helpers.js",
   "scripts": {
