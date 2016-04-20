@@ -99,7 +99,7 @@ var writeMissingFiles = function(data, entry) {
 
 		if (!file && name != null && typeof name !== 'undefined') {
 
-			console.log('checking name: ', name, typeof name, name.length);
+			// console.log('checking name: ', name, typeof name, name.length);
 
 			if (typeof name === "object") { name = name[0]; }
 
