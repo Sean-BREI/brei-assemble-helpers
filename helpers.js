@@ -65,4 +65,8 @@ module.exports.register = function(Handlebars, options) {
 		}[operator];
 	});
 
+	Handlebars.registerHelper('svg', function(name) {
+		return new Handlebars.SafeString("<svg class='icon icon-" + name + "'><use xlink:href='#icon-" + name + "'></use></svg>");
+	});
+
 };
