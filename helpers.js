@@ -40,7 +40,7 @@ module.exports.register = function(Handlebars, options) {
 		return console.log(data);
 	});
 
-	Handlebars.registerHelper('str_compare', function(a, b, opts) {
+	Handlebars.registerHelper('stringCompare', function(a, b, opts) {
 		if (a == b) {
 			return opts.fn(this);
 		} else {
@@ -48,7 +48,7 @@ module.exports.register = function(Handlebars, options) {
 		}
 	});
 
-	Handlebars.registerHelper('to_lower_case', function(str) {
+	Handlebars.registerHelper('toLowerCase', function(str) {
 		return str.toLowerCase();
 	});
 
@@ -65,7 +65,7 @@ module.exports.register = function(Handlebars, options) {
 		}[operator];
 	});
 
-	Handlebars.registerHelper('if_or', function(a, b, opts) {
+	Handlebars.registerHelper('ifOr', function(a, b, opts) {
 	    if (a || b) {
 	        return opts.fn(this);
 	    } else {
@@ -73,7 +73,7 @@ module.exports.register = function(Handlebars, options) {
 	    }
 	});
 
-	Handlebars.registerHelper('if_and', function(a, b, opts) {
+	Handlebars.registerHelper('ifAnd', function(a, b, opts) {
 	    if (a && b) {
 	        return opts.fn(this);
 	    } else {
