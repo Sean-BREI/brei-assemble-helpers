@@ -1,16 +1,31 @@
 {
   "name": "brei-assemble-helpers",
   "version": "1.0.7",
-  "description": "custom-handlebar-helpers",
+  "description": "BarkleyREI custom handlebar helpers",
   "main": "helpers.js",
   "scripts": {
-    "test": "echo \"Error: no test specified. MAKE THEM!\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/BarkleyREI/brei-assemble-helpers"
   },
   "author": "Joseph Dillon",
+  "contributors": [
+    {
+      "name": "Ian Moffitt",
+      "email": "nessthehero@gmail.com",
+      "url": "https://github.com/nessthehero"
+    },
+    {
+      "name": "Sean Stacho",
+      "url": "https://github.com/Sean-BREI"
+    },
+    {
+      "name": "Sarah Harissis",
+      "url": "https://github.com/sharissis"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/BarkleyREI/brei-assemble-helpers/issues"
