@@ -40,7 +40,7 @@ module.exports.register = function(Handlebars, options) {
 		return console.log(data);
 	});
 
-	Handlebars.registerHelper('str_compare', function(a, b, opts) {
+	Handlebars.registerHelper('stringCompare', function(a, b, opts) {
 		if (a == b) {
 			return opts.fn(this);
 		} else {
@@ -63,6 +63,22 @@ module.exports.register = function(Handlebars, options) {
 			"/": lvalue / rvalue,
 			"%": lvalue % rvalue
 		}[operator];
+	});
+
+	Handlebars.registerHelper('ifOr', function(a, b, opts) {
+	    if (a || b) {
+	        return opts.fn(this);
+	    } else {
+	        return opts.inverse(this);
+	    }
+	});
+
+	Handlebars.registerHelper('ifAnd', function(a, b, opts) {
+	    if (a && b) {
+	        return opts.fn(this);
+	    } else {
+	        return opts.inverse(this);
+	    }
 	});
 
 	Handlebars.registerHelper('svg', function(name) {
