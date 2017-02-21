@@ -40,7 +40,7 @@ module.exports.register = function(Handlebars, options) {
 		return console.log(data);
 	});
 
-	Handlebars.registerHelper('str_compare', function(a, b, opts) {
+	Handlebars.registerHelper('stringCompare', function(a, b, opts) {
 		if (a == b) {
 			return opts.fn(this);
 		} else {
@@ -63,6 +63,64 @@ module.exports.register = function(Handlebars, options) {
 			"/": lvalue / rvalue,
 			"%": lvalue % rvalue
 		}[operator];
+	});
+
+	Handlebars.registerHelper('ifOr', function(a, b, opts) {
+	    if (a || b) {
+	        return opts.fn(this);
+	    } else {
+	        return opts.inverse(this);
+	    }
+	});
+
+	Handlebars.registerHelper('ifAnd', function(a, b, opts) {
+	    if (a && b) {
+	        return opts.fn(this);
+	    } else {
+	        return opts.inverse(this);
+	    }
+	});
+
+	Handlebars.registerHelper('svg', function(name) {
+		return new Handlebars.SafeString("<svg class='icon icon-" + name + "'><use xlink:href='#icon-" + name + "'></use></svg>");
+	});
+
+	Handlebars.registerHelper('link', function(link) {
+		function isValid(str) {
+			return typeof str != 'undefined' && str != '';
+		}
+
+		var url = (isValid(link.url)) ? link.url : '#';
+		var icon = (isValid(link.icon)) ? '{{svg "' + link.icon + '"}}' : '';
+		var title = (isValid(link.title)) ? link.title : '';
+		var style = (isValid(link.style)) ? ' class="' + link.style + '"' : '';
+		var alt = (isValid(link.alt)) ? ' title="' + link.alt + '"' : ' title="' + title + '"';
+
+		var link = '';
+
+		if (url != '' && title != '') {
+			link = '<a href="' + url + '"{0}{1}>{2}' + new Handlebars.SafeString(title) + '</a>';
+			link = link.replace('{0}', alt);
+			link = link.replace('{1}', style);
+			link = link.replace('{2}', Handlebars.compile(icon));
+		}
+
+		return new Handlebars.SafeString(link);
+	});
+
+	Handlebars.registerHelper('place', function(w, h, text) {
+		function isValid(str) {
+			return typeof str != 'undefined' && str != '' && typeof str.data == 'undefined';
+		}
+
+		var width = (isValid(w)) ? w : '300';
+		var height = (isValid(h)) ? 'x' + h : '';
+		var text = (isValid(text)) ? '?text=' + encodeURI(text) : '';
+
+		var url = 'http://placehold.it/' + width + height + text;
+
+		return new Handlebars.SafeString("<img src='" + url + "' alt='Placeholder Image' />")
+
 	});
 
 };
